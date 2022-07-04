@@ -70,4 +70,12 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/login/", (req, res) => {
+  if (req.session.user) {
+    res.send(req.session.user);
+  } else {
+    res.send({ loggedIn: false });
+  }
+});
+
 module.exports = router;
