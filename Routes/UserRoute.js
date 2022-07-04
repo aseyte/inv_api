@@ -11,16 +11,14 @@ router.post("/register", async (req, res) => {
 
     if (userbyname) {
       res.send({ error: "Username is already in use" });
-      return;
-    }
-
-    if (hash) {
+    } else {
       const user = {
         username: req.body.username,
         password: hash,
         firstname: req.body.firstname,
         lastname: req.body.lastname,
       };
+
       User.create(user, (err, result) => {
         if (err) {
           res.send({ error: "Username is already in use" });
