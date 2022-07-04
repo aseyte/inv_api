@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
       };
       User.create(user, (err, result) => {
         if (err) {
-          res.send({ error: err });
+          res.send({ error: "Username is already in use" });
         } else {
           res.send({ ok: result });
         }
