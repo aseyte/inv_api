@@ -32,9 +32,40 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.put("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  const user = await User.findOne({ username });
+
   try {
+    if (!user) {
+      res.send({
+        error: "There's no such account",
+      });
+    } else {
+      brcypt.compare(password, user.password, (err, result) => {
+        if (result) {
+          req.session.user = {
+            loggedIn: true,
+            _id: user._id,
+            username: user.username,
+            firstname: user.firstname,
+            lastname: user.lastname,
+          };
+
+          res.send(req.session.user);
+        } else {
+          res.send({
+            error: "Incorrect password",
+          });
+        }
+      });
+    }
   } catch (error) {
+    res.send({
+      err: "An error occured",
+    });
     console.log(error);
   }
 });
