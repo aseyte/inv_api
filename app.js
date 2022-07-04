@@ -26,11 +26,7 @@ const store = new MongoDBStore({
 app.use(express.json());
 app.use(
   cors({
-    origin: [
-      "https://zcmc.vercel.app",
-      "http://localhost:3000",
-      "https://zcmc.netlify.app",
-    ],
+    origin: ["http://localhost:3000"],
     methods: ["PUT", "DELETE", "GET", "POST", "*"],
     credentials: true,
   })
@@ -57,7 +53,7 @@ app.use(
 app.use("/api/auth/", UserRoute);
 
 app.get("/", (req, res) => {
-  res.send("sds");
+  res.send("ZCMC MMS-INVENTORY SERVER");
 });
 
 //Asynchronous connection to database
