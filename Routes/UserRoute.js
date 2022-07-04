@@ -3,7 +3,7 @@ const User = require("../Models/User");
 const brcypt = require("bcrypt");
 const saltRounds = 10;
 
-router.put("/register", async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     const hash = await brcypt.hash(req.body.password, saltRounds);
 
@@ -27,13 +27,8 @@ router.put("/register", async (req, res) => {
   }
 });
 
-router.get("/users", async (req, res) => {
+router.put("/login", async (req, res) => {
   try {
-    const result = await User.find({});
-
-    if (result) {
-      res.send(result);
-    }
   } catch (error) {
     console.log(error);
   }
