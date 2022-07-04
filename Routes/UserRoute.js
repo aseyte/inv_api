@@ -7,6 +7,13 @@ router.post("/register", async (req, res) => {
   try {
     const hash = await brcypt.hash(req.body.password, saltRounds);
 
+    const userbyname = await User.findOne({ username: req.body.username });
+
+    if (userbyname) {
+      res.send({ error: "Username is already in use" });
+      return;
+    }
+
     if (hash) {
       const user = {
         username: req.body.username,
