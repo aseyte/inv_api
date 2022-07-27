@@ -36,7 +36,6 @@ router.post("/register", async (req, res) => {
           ? res.send({ emailErr: "Email is already in use" })
           : res.send({ usernameErr: "Username is already in use" });
       } else {
-
         const mailOptions = {
           from: "ajlao.zcmc@gmail.com",
           to: req.body.email,
@@ -49,13 +48,9 @@ router.post("/register", async (req, res) => {
             '">Verify Account.</a></p>',
         };
 
-        let result = await transporter.sendMail(mailOptions);
-
-        if (result) {
-          res.send({ ok: "Registered" });
-        } else {
-          res.send({ err: "Error" });
-        }
+        transporter.sendMail(mailOptions).then((error) => {
+          res.send(error);
+        });
       }
     });
   } catch (error) {
