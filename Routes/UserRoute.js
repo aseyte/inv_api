@@ -2,6 +2,21 @@ const router = require("express").Router();
 const User = require("../Models/User");
 const brcypt = require("bcrypt");
 const saltRounds = 10;
+const nodemailer = require("nodemailer");
+const randomstring = require("randomstring");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "ajlao.zcmc@gmail.com",
+    pass: "arzljameslao123",
+  },
+});
+
+let randomString = randomstring.generate({
+  length: 48,
+  charset: "alphabetic",
+});
 
 router.post("/register", async (req, res) => {
   try {
@@ -21,7 +36,26 @@ router.post("/register", async (req, res) => {
           ? res.send({ emailErr: "Email is already in use" })
           : res.send({ usernameErr: "Username is already in use" });
       } else {
-        res.send({ ok: result });
+
+        const mailOptions = {
+          from: "ajlao.zcmc@gmail.com",
+          to: req.body.email,
+          subject: "Account verification",
+          html:
+            '<p>Click the link below to activate your account: <br /> <a href="https://zcmc.vercel.app/account/verification/' +
+            randomString +
+            "/" +
+            id +
+            '">Verify Account.</a></p>',
+        };
+
+        let result = await transporter.sendMail(mailOptions);
+
+        if (result) {
+          res.send({ ok: "Registered" });
+        } else {
+          res.send({ err: "Error" });
+        }
       }
     });
   } catch (error) {
