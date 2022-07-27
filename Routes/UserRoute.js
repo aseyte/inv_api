@@ -124,4 +124,21 @@ router.get("/logout/", (req, res) => {
   });
 });
 
+router.get("/activate/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const result = await User.findByIdAndUpdate(
+      { _id: id },
+      { verified: true }
+    );
+
+    if (result) {
+      res.send({ ok: "Account activated!" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
