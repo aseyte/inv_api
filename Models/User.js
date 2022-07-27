@@ -17,7 +17,8 @@ const UserSchema = new mongoose.Schema({
   verified: {
     type: Boolean,
     default: false
-  }
+  },
+  otp: Number,
 });
 
 const User = mongoose.model("User", UserSchema, "user");

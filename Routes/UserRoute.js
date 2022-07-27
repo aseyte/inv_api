@@ -18,6 +18,11 @@ let randomString = randomstring.generate({
   charset: "alphabetic",
 });
 
+let randomPin = randomstring.generate({
+  length: 6,
+  charset: "numeric",
+});
+
 router.post("/register", async (req, res) => {
   try {
     const hash = await brcypt.hash(req.body.password, saltRounds);
@@ -28,6 +33,7 @@ router.post("/register", async (req, res) => {
       email: req.body.email,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
+      otp: randomPin,
     };
 
     User.create(user, (err, result) => {
