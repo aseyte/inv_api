@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
   },
   password: String,
   firstname: String,
-  middlename: String,
+  lastname: String,
 });
 
 const User = mongoose.model("User", UserSchema, "user");

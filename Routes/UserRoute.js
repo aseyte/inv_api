@@ -7,27 +7,23 @@ router.post("/register", async (req, res) => {
   try {
     const hash = await brcypt.hash(req.body.password, saltRounds);
 
-    const userbyname = await User.findOne({ username: req.body.username });
+    const user = {
+      username: req.body.username,
+      password: hash,
+      email: req.body.email,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+    };
 
-
-      const user = {
-        username: req.body.username,
-        password: hash,
-        email: req.body.email,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-      };
-
-      User.create(user, (err, result) => {
-        if (err) {
-          err.message.includes("email")
-            ? res.send({ emailErr: "Email is already in use" })
-            : res.send({ usernameErr: "Username is already in use" });
-        } else {
-          res.send({ ok: result });
-        }
-      });
-    
+    User.create(user, (err, result) => {
+      if (err) {
+        err.message.includes("email")
+          ? res.send({ emailErr: "Email is already in use" })
+          : res.send({ usernameErr: "Username is already in use" });
+      } else {
+        res.send({ ok: result });
+      }
+    });
   } catch (error) {
     console.log(error);
   }
