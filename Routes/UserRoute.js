@@ -124,6 +124,19 @@ router.get("/logout/", (req, res) => {
   });
 });
 
+router.get("/user/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await User.findById({ _id });
+
+    if (result) {
+      res.send(result);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.get("/activate/:id", async (req, res) => {
   const id = req.params.id;
 
