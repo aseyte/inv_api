@@ -47,7 +47,7 @@ router.post("/register", async (req, res) => {
             '">Verify Account.</a></p>',
         };
 
-        transporter.sendMail(mailOptions).then((error) => {
+        transporter.sendMail(mailOptions).then((error, data) => {
           res.send(error);
         });
       }
