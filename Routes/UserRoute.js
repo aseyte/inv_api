@@ -113,4 +113,14 @@ router.get("/login/", (req, res) => {
   }
 });
 
+router.get("/logout/", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.clearCookie("userId").send("cleared cookie");
+    }
+  });
+});
+
 module.exports = router;
