@@ -141,13 +141,26 @@ router.put("/activate/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
+    const user = await User.findById({ _id: id });
+
     const result = await User.findByIdAndUpdate(
       { _id: id },
       { verified: true }
     );
 
     if (result) {
-      res.send({ ok: "Account activated!" });
+      req.session.user = {
+        loggedIn: true,
+        _id: user._id,
+        username: user.username,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        verified: user.verified,
+        otp: user.otp,
+      };
+
+      res.send(req.session.user);
     }
   } catch (error) {
     console.log(error);
