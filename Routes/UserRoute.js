@@ -149,25 +149,18 @@ router.put("/activate/:id", async (req, res) => {
     );
 
     if (result) {
-      req.session.destroy((err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          // res.clearCookie("userId").send("cleared cookie");
-          req.session.user = {
-            loggedIn: true,
-            _id: user._id,
-            username: user.username,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.email,
-            verified: user.verified,
-            otp: user.otp,
-          };
+      req.session.user = {
+        loggedIn: true,
+        _id: user._id,
+        username: user.username,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        verified: user.verified,
+        otp: user.otp,
+      };
 
-          res.send(req.session.user);
-        }
-      });
+      res.send(req.session.user);
     }
   } catch (error) {
     console.log(error);
