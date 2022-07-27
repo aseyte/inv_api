@@ -44,7 +44,6 @@ router.post("/register", async (req, res) => {
             '<p>Click the link below to activate your account: <br /> <a href="https://zcmc.vercel.app/account/verification/' +
             randomString +
             "/" +
-            id +
             '">Verify Account.</a></p>',
         };
 
