@@ -9,9 +9,7 @@ router.post("/register", async (req, res) => {
 
     const userbyname = await User.findOne({ username: req.body.username });
 
-    if (userbyname) {
-      res.send({ error: "Username is already in use" });
-    } else {
+
       const user = {
         username: req.body.username,
         password: hash,
@@ -29,7 +27,7 @@ router.post("/register", async (req, res) => {
           res.send({ ok: result });
         }
       });
-    }
+    
   } catch (error) {
     console.log(error);
   }
@@ -55,6 +53,7 @@ router.post("/login", async (req, res) => {
             username: user.username,
             firstname: user.firstname,
             lastname: user.lastname,
+            email: user.email,
           };
 
           res.send(req.session.user);
