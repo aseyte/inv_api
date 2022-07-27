@@ -149,18 +149,19 @@ router.put("/activate/:id", async (req, res) => {
     );
 
     if (result) {
-      req.session.user = {
-        loggedIn: true,
-        _id: user._id,
-        username: user.username,
-        firstname: user.firstname,
-        lastname: user.lastname,
-        email: user.email,
-        verified: user.verified,
-        otp: user.otp,
-      };
+      // req.session.user = {
+      //   loggedIn: true,
+      //   _id: user._id,
+      //   username: user.username,
+      //   firstname: user.firstname,
+      //   lastname: user.lastname,
+      //   email: user.email,
+      //   verified: user.verified,
+      //   otp: user.otp,
+      // };
 
-      res.send(req.session.user);
+      // res.send(req.session.user);
+      console.log(result);
     }
   } catch (error) {
     console.log(error);
