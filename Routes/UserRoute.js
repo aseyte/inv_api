@@ -161,7 +161,7 @@ router.put("/activate/:id", async (req, res) => {
       // };
 
       // res.send(req.session.user);
-      console.log(result);
+      res.send(result);
     }
   } catch (error) {
     console.log(error);
