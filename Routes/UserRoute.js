@@ -141,7 +141,7 @@ router.put("/activate/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const user = await User.findById({ _id: id });
+    const user = User.findById({ _id: id });
 
     const result = await User.findByIdAndUpdate(
       { _id: id },
