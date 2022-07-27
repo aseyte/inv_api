@@ -137,7 +137,7 @@ router.get("/user/:id", async (req, res) => {
   }
 });
 
-router.get("/activate/:id", async (req, res) => {
+router.put("/activate/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
