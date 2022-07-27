@@ -5,7 +5,7 @@ const saltRounds = 10;
 const nodemailer = require("nodemailer");
 const randomstring = require("randomstring");
 
-let testAccount = await nodemailer.createTestAccount();
+let testAccount = nodemailer.createTestAccount();
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
