@@ -26,7 +26,7 @@ const store = new MongoDBStore({
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://inventory-mms.vercel.app/"],
+    origin: ["http://localhost:3000", "https://inventory-mms.vercel.app"],
     methods: ["PUT", "DELETE", "GET", "POST", "*"],
     credentials: true,
   })
