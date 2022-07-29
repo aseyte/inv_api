@@ -154,7 +154,7 @@ router.put("/activate/:id", async (req, res) => {
         firstname: result.firstname,
         lastname: result.lastname,
         email: result.email,
-        verified: result.verified,
+        verified: true,
         otp: result.otp,
       };
 
