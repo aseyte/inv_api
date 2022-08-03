@@ -81,7 +81,7 @@ router.post("/login", async (req, res) => {
             lastname: user.lastname,
             email: user.email,
             verified: user.verified,
-            otp: user.otp,
+            userType: user.userType,
           };
 
           res.send(req.session.user);
