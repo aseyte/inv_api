@@ -159,4 +159,16 @@ router.put("/activate/:id", async (req, res) => {
   }
 });
 
+router.get("/users", async (req, res) => {
+  try {
+    const result = await User.find({});
+
+    if (result) {
+      res.send(result);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
