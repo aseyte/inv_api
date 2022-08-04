@@ -4,6 +4,7 @@ const brcypt = require("bcrypt");
 const saltRounds = 10;
 const nodemailer = require("nodemailer");
 const randomstring = require("randomstring");
+const { response } = require("express");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -178,6 +179,23 @@ router.delete("/user-delete/:id", async (req, res) => {
 
     if (result) {
       res.send({ ok: "Deleted User" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.put("/verify-user/:id", async (req, res) => {
+  const id = req.param.id;
+
+  try {
+    const result = await User.findByIdAndUpdate(
+      { _id: id },
+      { verified: true }
+    );
+
+    if (result) {
+      res.send({ ok: "Activated user account" });
     }
   } catch (error) {
     console.log(error);
