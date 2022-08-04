@@ -69,33 +69,37 @@ router.post("/login", async (req, res) => {
   try {
     if (!user) {
       res.send({
-        error: "There's no such account",
+        err: "The username you entered isn't associated with any MMS-Inventory account.",
+      });
+    } else if (!user.verified || user.verified === false) {
+      res.send({
+        verfied: "Your account is pending",
+        email: user.email,
       });
     } else {
-      brcypt.compare(password, user.password, (err, result) => {
+      brcypt.compare(password, user.password, (error, result) => {
         if (result) {
           req.session.user = {
             loggedIn: true,
             _id: user._id,
             username: user.username,
+            userType: user.userType,
+            verified: user.verfied,
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.email,
-            verified: user.verified,
-            userType: user.userType,
           };
-
           res.send(req.session.user);
         } else {
           res.send({
-            error: "Incorrect password",
+            err: "Incorrect username or password",
           });
         }
       });
     }
   } catch (error) {
     res.send({
-      err: "An error occured",
+      err: "Error logging in. Please check your account and try again.",
     });
     console.log(error);
   }
