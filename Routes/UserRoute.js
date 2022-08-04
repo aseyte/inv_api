@@ -186,7 +186,7 @@ router.delete("/user-delete/:id", async (req, res) => {
 });
 
 router.put("/verify-user/:id", async (req, res) => {
-  const id = req.param.id;
+  const id = req.params.id;
 
   try {
     const result = await User.findByIdAndUpdate(
