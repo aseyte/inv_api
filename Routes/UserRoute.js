@@ -61,6 +61,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  console.log('hi')
   const username = req.body.username;
   const password = req.body.password;
 
@@ -106,6 +107,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/login/", (req, res) => {
+  console.log('hi')
   if (req.session.user) {
     res.send(req.session.user);
   } else {

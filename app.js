@@ -15,7 +15,7 @@ const UserRoute = require("./Routes/UserRoute");
 // app.use(bodyParser.urlencoded({ extended: true }));
 
 const URI =
-  "mongodb+srv://admin:admin@mms-inventory.3ns1mcd.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://aseyte:09272384152@cluster0.i0hlo.mongodb.net/?retryWrites=true&w=majority";
 
 const store = new MongoDBStore({
   uri: URI,
